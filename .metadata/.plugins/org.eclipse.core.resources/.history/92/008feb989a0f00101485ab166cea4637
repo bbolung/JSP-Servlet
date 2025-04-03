@@ -1,0 +1,8 @@
+function check() {
+	if(!isChecked(document.frm.item.value)) {
+		alert("최소 한 개 이상 선택해주세요.");
+		return false;
+	}else {
+		return true;
+	}
+}

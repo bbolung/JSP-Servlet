@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {margin: 0 auto; padding: 0; box-sizing: border-box;}
+
+        h1 {height: 60px; text-align: center; margin-top: 30px; margin-bottom: 10px;}
+
+        hr {width: 98%;}
+
+        .basket {
+            width: 90%;
+            display: flex; flex-direction: row; flex-wrap: wrap;
+            justify-content: center; align-items: center; 
+        }
+
+        input[type="image"]{
+            width: 270px; height: 270px; margin: 30px 40px 5px 0; padding: 15px;
+            border: 2px solid #000; box-shadow: 10px 10px 5px  #666;
+        }
+
+        input[type="image"]:hover {
+            opacity: 0.6;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>원하는 상품을 클릭해 주세요!! 마구마구^^</h1>
+    <hr>
+    <form action="basket1" method="get">
+        <div class="basket">
+            <input type="image" src="./images/1.jpg" name="doll" value="p001" alt="doll 1">
+            <input type="image" src="./images/2.jpg" name="doll" value="p002" alt="doll 2">
+            <input type="image" src="./images/3.jpg" name="doll" value="p003" alt="doll 3">
+            <input type="image" src="./images/4.jpg" name="doll" value="p004" alt="doll 4">
+            <input type="image" src="./images/5.jpg" name="doll" value="p005" alt="doll 5">
+            <input type="image" src="./images/6.jpg" name="doll" value="p006" alt="doll 6">
+            <input type="image" src="./images/7.jpg" name="doll" value="p007" alt="doll 7">
+            <input type="image" src="./images/8.jpg" name="doll" value="p008" alt="doll 8">
+            <input type="image" src="./images/9.jpg" name="doll" value="p009" alt="doll 9">
+            <input type="image" src="./images/10.jpg" name="doll" value="p010" alt="doll 10">
+        </div>
+    </form>
+    
+    <h2>선택한 상품 : ${id}</h2>
+    <br>
+    
+</body>
+</html>

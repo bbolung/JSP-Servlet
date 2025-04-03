@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {margin: 0 auto; padding: 0; box-sizing: border-box;}
+
+        h1 {height: 50px; text-align: center; margin: 20px 0;}
+
+        hr {width: 98%;}
+
+        .doll {
+            display: flex; flex-direction: row; flex-wrap: wrap;
+            justify-content: center; align-items: center;
+        }
+
+        input[type="image"]{
+            width: 220px; height: 220px; margin: 30px 40px 5px 0; padding: 15px;
+            border: 2px solid #000; box-shadow: 10px 10px 5px  #666;
+        }
+
+        input[type="image"]:hover {
+            opacity: 0.6;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>원하는 상품을 클릭해 주세요!! 마구마구^^</h1>
+    <hr>
+    <form action="basket1" method="get">
+        <div class="doll">
+            <input type="image" src="/images/.1jpg" id="p001" alt="p001" >
+            <input type="image" src="" id="p002" alt="p002">
+            <input type="image" src="" id="p003" alt="p003">
+            <input type="image" src="" id="p004" alt="p004">
+            <input type="image" src="" id="p005" alt="p005">
+            <input type="image" src="" id="p006" alt="p006">
+            <input type="image" src="" id="p007" alt="p007">
+            <input type="image" src="" id="p008" alt="p008">
+            <input type="image" src="" id="p009" alt="p009">
+            <input type="image" src="" id="p010" alt="p010">
+        </div>
+    </form>
+</body>
+</html>

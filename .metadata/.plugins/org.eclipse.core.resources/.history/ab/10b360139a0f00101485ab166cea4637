@@ -1,0 +1,7 @@
+function check() {
+	if(document.frm.item.value == "") {
+		alert("최소 한 개 이상 선택해주세요.");
+		return false;
+	}else
+		return ture;
+}
