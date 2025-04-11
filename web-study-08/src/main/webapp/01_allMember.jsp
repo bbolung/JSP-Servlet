@@ -28,11 +28,21 @@
 		</tr>
 	<%
 		try{
+			//1. 드라이브 로드(객체 생성)
 			Class.forName("oracle.jdbc.driver.OracleDriver");
+			//2. conn 참조변수에 DB연결 저장
 			conn = DriverManager.getConnection(url, uid, pass);
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			//out.println(conn); -> 페이지에 값이 나와야 연결 성공
 			
+			//3.sql 구문 전송
+			stmt = conn.createStatement();
+			
+			//4. 조회한 결과 주소를 rs에 저장
+			rs = stmt.executeQuery(sql);
+			//stmt.executeQuery(sql); -> sql 실행 = 'select * from memeber;' (table 조회) 
+			//stmt.executeUpdate(sql); -> insert, upadte, delete
+			
+			//5. 결과 출력
 			while(rs.next()){
 				out.println("<tr>");
 				out.println("<td>" + rs.getString("name") +"</td>");
