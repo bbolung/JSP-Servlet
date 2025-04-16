@@ -19,11 +19,6 @@ public class MemberVO {
 	private String email;
 	private String phone;
 	private int admin;
-	public String getName() {
-		return name;
-	}
-	
-	
 	
 	@Override
 	public String toString() {
@@ -31,6 +26,10 @@ public class MemberVO {
 				+ phone + ", admin=" + admin + "]";
 	}
 
+	public String getName() {
+		return name;
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}

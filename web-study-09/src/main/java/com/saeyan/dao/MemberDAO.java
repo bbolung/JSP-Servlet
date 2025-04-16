@@ -9,6 +9,8 @@ import com.saeyan.dto.MemberVO;
 
 public class MemberDAO {
 	
+	//싱글톤 패턴 -> 외부에서  getInstance() 호출하면 instance값 전달
+	//instance : 객체 생성된 정보 가지고 있음
 	private static MemberDAO instance = new MemberDAO();
 	
 	private MemberDAO() {}
@@ -55,20 +57,21 @@ public class MemberDAO {
 			conn = getConnection();
 			//2. sql구문 전송
 			pstmt = conn.prepareStatement(sql);
-			//3. sql 맵핑 -> 입력받은 userid를 ?자리에 대입
+			//3. sql 맵핑 -> 입력받은 userid를 ?자리에 대입 -> pwd 있으면 userid 존재O, 없으면 userid 존재X
 			pstmt.setString(1, userid);
 			//4. sql 구문 실행(결과값 rs에 저장 -> 값 있을 수O, 없을 수O)
 			rs = pstmt.executeQuery();  //sql구문이 select일 때만
 			
+			//rs의 값 존재O = userid 존재
 			if(rs.next()) {
-				//userid 존재 -> 전달받은 userid와 조회한 userid가 동일한지 확인
+				//전달받은 pwd가 null값 아닌지(안전장치) + 전달받은 pwd와 조회한 pwd가 동일한지 확인
 				if(rs.getString("pwd") != null && rs.getString("pwd").equals(pwd)) {
 					result = 1;		//userid, pwd일치
 				}else {
 					result = 0;		//userid 일치, pwd 불일치
 				}
+			//userid 존재X
 			}else {
-				//userid 존재X
 				result = -1;	//초기값 result = -1이기에 주지 않아도 됨
 			}
 			
@@ -179,6 +182,99 @@ public class MemberDAO {
 		}
 		
 		return result;
+	}
+	
+	//회원가입한 회원정보 DB에 추가하여 저장
+	public int insertMember(MemberVO mVo) {
+		
+		//result 기본값으로 의미X
+		int result = -1;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		//insert이기에 ResultSet 사용X
+		
+		//모든 열을 사용할 것이기에 member(name, userid,...) 열 이름 생략O
+		//열의 순서를 바꿀 경우: 반드시 열 이름 작성!
+		String sql = "insert into member values(?,?,?,?,?,?)";
+		
+		try {
+			//1. DB연결
+			conn = getConnection();
+			
+			//2. sql구문 전송
+			pstmt = conn.prepareStatement(sql);
+	
+			//mVo의 변수 getter로 가져와서 sql에 값 전달
+			pstmt.setString(1, mVo.getName());
+			pstmt.setString(2, mVo.getUserid());
+			pstmt.setString(3, mVo.getPwd());
+			pstmt.setString(4, mVo.getEmail());
+			pstmt.setString(5, mVo.getPhone());
+			pstmt.setInt(6, mVo.getAdmin());		//DB에서 admin타입 : number(정수)
+			
+			/*
+			   3. sql 구문실행
+			   executeUpdate : insert, update, delete시 사용
+			   result 기본값
+			   result: 0 -> 저장 실패
+			   result: 1 -> 저장 성공
+			   commit은 auto commit; -> 할 필요X (자동 DB저장)
+			 */
+			result = pstmt.executeUpdate();
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return result;
+	}
+	
+	//DB에 data update 저장
+	public void updateMember(MemberVO mVo) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		//insert이기에 ResultSet 사용X
+		
+		//sql 명령문 : update member set name='변경이름' where userid="a"; -> userid='a'인 name만 변경
+		String sql = "update member set pwd=?, email=?, phone=?, admin=? where userid=?";
+		
+		try {
+			//1. DB연결
+			conn = getConnection();
+			
+			//2. sql구문 전송
+			pstmt = conn.prepareStatement(sql);
+	
+			//mVo의 변수를 getter로 가져와서 sql에 값 전달
+			pstmt.setString(1, mVo.getPwd());
+			pstmt.setString(2, mVo.getEmail());
+			pstmt.setString(3, mVo.getPhone());
+			pstmt.setInt(4, mVo.getAdmin());
+			pstmt.setString(5, mVo.getUserid());
+			
+			//3. sql구문 실행
+			pstmt.executeUpdate();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }		
 

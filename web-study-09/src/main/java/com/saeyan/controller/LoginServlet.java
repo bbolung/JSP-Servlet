@@ -18,7 +18,17 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("member/login.jsp");
+		
+		String url = "member/login.jsp";
+		
+		HttpSession session = request.getSession();
+		
+		//로그인했을 때 session 저장 -> null값 아닌 경우 = 로그인된 사용자
+		if(session.getAttribute("loginUser") != null)
+			url = "main.jsp";
+		
+		//url으로 페이지 이동
+		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request,  response);
 	}
 
@@ -31,6 +41,7 @@ public class LoginServlet extends HttpServlet {
 		String url = "member/login.jsp";
 		
 		//DB연결해서 uesrid, pwd 해당하는지 확인!
+		//MemberDAO의 객체 instance 가져옴 = mDao -> MemberDAO의 메소드에 접근O
 		MemberDAO mDao = MemberDAO.getInstance();
 		
 		int result = mDao.userCheck(userid, pwd);

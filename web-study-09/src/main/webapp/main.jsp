@@ -26,8 +26,9 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="로그아운">&nbsp;&nbsp;
-					<input type="button" value="회원정보 변경">
+					<input type="submit" value="로그아웃" onclick="location.href='logout.do'">&nbsp;&nbsp;
+					<input type="button" value="회원정보 변경" 
+						onclick="location.href='memberUpdate.do?userid=${loginUser.userid}'">
 				</td>
 			</tr>
 		</table>
