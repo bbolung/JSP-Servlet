@@ -20,9 +20,9 @@ public class EmployeesDAO {
 	//DB 연결
 	public Connection getConnection() throws Exception{
 		
-		String url = "jdbc:oracle:thin:@localhost:49161:xe";
-		String uri = "system";
-		String pass = "oracle";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String uri = "hr";
+		String pass = "hr";
 		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		

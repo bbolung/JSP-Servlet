@@ -16,9 +16,9 @@ public class DBManager {
 		String pass = null;
 		
 		try {
-			url = "jdbc:oracle:thin:@localhost:49161:xe";
-			uri = "system";
-			pass = "oracle";
+			url = "jdbc:oracle:thin:@localhost:1521:xe";
+			uri = "hr";
+			pass = "hr";
 			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
